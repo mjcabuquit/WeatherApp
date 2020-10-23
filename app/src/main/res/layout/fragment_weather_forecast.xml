@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="16dp">
+
+    <ImageView
+        android:id="@+id/weatherForecastImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_star_empty"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/weatherForecastPlaceTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        style="@style/TextAppearance.MaterialComponents.Headline6"
+        app:layout_constraintEnd_toStartOf="@id/weatherForecastImageView"
+        app:layout_constraintTop_toTopOf="@id/weatherForecastImageView"
+        app:layout_constraintBottom_toBottomOf="@id/weatherForecastImageView"
+        tools:text="Manila" />
+    
+    <TextView
+        android:id="@+id/weatherForecastTemperatureTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/TextAppearance.MaterialComponents.Headline5"
+        app:layout_constraintTop_toBottomOf="@id/weatherForecastImageView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="36*C" />
+
+    <TextView
+        android:id="@+id/weatherForecastStatusTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        style="@style/TextAppearance.MaterialComponents.Body2"
+        tools:text="Cloudy"
+        app:layout_constraintTop_toTopOf="@id/weatherForecastTemperatureTextView"
+        app:layout_constraintStart_toEndOf="@id/weatherForecastTemperatureTextView"
+        app:layout_constraintBottom_toTopOf="@id/weatherForecastHighLowTemperatureTextView"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/weatherForecastHighLowTemperatureTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="High 36*C / Low 36*C"
+        android:layout_marginTop="4dp"
+        style="@style/TextAppearance.MaterialComponents.Overline"
+        app:layout_constraintTop_toBottomOf="@id/weatherForecastStatusTextView"
+        app:layout_constraintStart_toStartOf="@id/weatherForecastStatusTextView"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
