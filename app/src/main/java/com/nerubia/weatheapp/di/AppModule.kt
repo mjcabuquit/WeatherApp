@@ -4,7 +4,7 @@ import com.nerubia.weatheapp.data.local.WeatherForecastLocal
 import com.nerubia.weatheapp.data.local.WeatherForecastLocalImpl
 import com.nerubia.weatheapp.data.repository.WeatherForecastRepository
 import com.nerubia.weatheapp.data.repository.WeatherForecastRepositoryImpl
-import com.nerubia.weatheapp.data.services.WeatherForecastService
+import com.nerubia.weatheapp.data.service.WeatherForecastService
 import com.nerubia.weatheapp.ui.details.WeatherForecastDetailsViewModel
 import com.nerubia.weatheapp.ui.forecast.WeatherForecastViewModel
 import okhttp3.OkHttpClient
@@ -20,6 +20,15 @@ val appModule = module {
         logging.setLevel(HttpLoggingInterceptor.Level.BODY)
         val client = OkHttpClient.Builder()
             .addInterceptor(logging)
+            .addInterceptor {
+                val url = it.request().url.newBuilder().apply {
+                    addQueryParameter("appid","a78568341392af719e7b0191017b57c9")
+                }.build()
+
+                val request =  it.request().newBuilder().url(url).build()
+
+                return@addInterceptor it.proceed(request)
+            }
             .build()
 
         Retrofit.Builder()

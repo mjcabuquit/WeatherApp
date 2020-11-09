@@ -3,7 +3,7 @@ package com.nerubia.weatheapp.data.repository
 import com.nerubia.weatheapp.data.dto.transformer.transform
 import com.nerubia.weatheapp.data.local.WeatherForecastLocal
 import com.nerubia.weatheapp.data.model.WeatherForecastModel
-import com.nerubia.weatheapp.data.services.WeatherForecastService
+import com.nerubia.weatheapp.data.service.WeatherForecastService
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.ConflatedBroadcastChannel
 import kotlinx.coroutines.flow.Flow
