@@ -1,5 +1,6 @@
 package com.nerubia.weatheapp.ui.forecast.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,42 +22,41 @@ class WeatherForecastListAdapter(
                 .inflate(R.layout.layout_weather_forecast, parent, false)
         )
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: WeatherForecastViewHolder, position: Int) {
-        holder.itemView.weatherForecastTemperatureTextView.text =
-            String.format(
-                holder.itemView.resources.getString(R.string.weather_temperature),
-                list[position].main.temp
+        holder.itemView.apply {
+            weatherForecastTemperatureTextView.text = "${list[position].main.temp} °C"
+            weatherForecastPlaceTextView.text = list[position].name
+            weatherForecastStatusTextView.text =
+                list[position].weather.find { true }?.main
+
+            setBackgroundColor(
+                ContextCompat.getColor(
+                    holder.itemView.context,
+                    getTempColor(position)
+                )
             )
-        holder.itemView.weatherForecastPlaceTextView.text = list[position].name
-        holder.itemView.weatherForecastStatusTextView.text =
-            list[position].weather.find { true }?.main
 
-        val backgroundColor = if (list[position].main.temp <= 0) {
-            R.color.colorFreezing
-        } else if (list[position].main.temp > 0 && list[position].main.temp <= 15) {
-            R.color.colorCold
-        } else if (list[position].main.temp > 15 && list[position].main.temp <= 30) {
-            R.color.colorWarm
-        } else {
-            R.color.colorHot
+            weatherForecastImageView.visibility = if (list[position].favorite) {
+                View.VISIBLE
+            } else {
+                View.GONE
+            }
+
+            setOnClickListener {
+                listener.onClickItemListener(list[position])
+            }
         }
+    }
 
-        holder.itemView.setBackgroundColor(
-            ContextCompat.getColor(
-                holder.itemView.context,
-                backgroundColor
-            )
-        )
-
-        holder.itemView.weatherForecastImageView.visibility = if(list[position].favorite) {
-            View.VISIBLE
-        } else {
-            View.GONE
-        }
-
-        holder.itemView.setOnClickListener {
-            listener.onClickItemListener(list[position])
-        }
+    private fun getTempColor(position: Int): Int = if (list[position].main.temp <= 0) {
+        R.color.freezing
+    } else if (list[position].main.temp > 0 && list[position].main.temp <= 15) {
+        R.color.cold
+    } else if (list[position].main.temp > 15 && list[position].main.temp <= 30) {
+        R.color.warm
+    } else {
+        R.color.hot
     }
 
     fun addAll(itemList: List<WeatherForecastModel>) {

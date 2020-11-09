@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">Weather App</string>
     <string name="weather_min_max_temperature">High %d°C / Low %d°C</string>
-    <string name="weather_temperature">%s°C</string>
     <string name="weather_forecast_no_connection">No connection is available.</string>
     <string name="weather_forecast_http_error">An api error has occurred.</string>
     <string name="weather_forecast_something_wrong">Something is wrong. Please try again.</string>

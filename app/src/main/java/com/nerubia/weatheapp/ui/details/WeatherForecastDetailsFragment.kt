@@ -1,5 +1,6 @@
 package com.nerubia.weatheapp.ui.details
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -24,13 +25,13 @@ class WeatherForecastDetailsFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? = inflater.inflate(R.layout.fragment_weather_forecast, container, false)
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.weatherUpdateLiveData.observe(viewLifecycleOwner, {
             weatherForecastPlaceTextView.text = it.name
-            weatherForecastTemperatureTextView.text =
-                getString(R.string.weather_temperature, it.main.temp)
+            weatherForecastTemperatureTextView.text = "${it.main.temp} °C"
             weatherForecastStatusTextView.text = it.weather.first().main
             weatherForecastHighLowTemperatureTextView.text =
                 getString(R.string.weather_min_max_temperature,
